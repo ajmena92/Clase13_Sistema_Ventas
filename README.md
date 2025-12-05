@@ -1,2 +1,6 @@
 # Clase13_Sistema_Ventas
-Repaso final curso Python
+# Autor : Andrés Mena Abarca
+### Fecha 04/12/2025
+## Version 1.0
+
+Repaso final curso Python clase 13 UMCA
