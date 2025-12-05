@@ -20,8 +20,15 @@ def analiza_ventas(ventas):
 
         # print(df)
         # producto con mayor ingreso en ventas
-        producto_mayor_ingreso = df.groupby("Producto")["Subtotal"].sum().idxmax()
-        print(f"Producto con mayor ingreso en ventas: {producto_mayor_ingreso}")
+        producto_top = df["Subtotal"].max()
+        fila_venta_max = df.loc[df["Subtotal"].idxmax()]
+        # producto_mayor_ingreso = df.groupby("Producto")["Subtotal"].sum().idxmax()
+        # producto_mayor_ingreso = producto_top
+        producto_mayor_ingreso = fila_venta_max["Producto"]
+        monto_mayor_ingreso = fila_venta_max["Subtotal"]
+        print(
+            f"Producto con mayor ingreso en ventas: {producto_mayor_ingreso} (${monto_mayor_ingreso:.2f}) "
+        )
 
         # Mejor Cliente
         cliente_top = df.groupby("Cliente")["Subtotal"].sum().idxmax()
