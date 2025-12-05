@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 
 def guardar_csv(ventas, archivo="ventas.csv"):
@@ -50,10 +51,8 @@ def ingresar_ventas(ventas):
                 "Cliente": cliente,
                 "Fecha": fecha,
             }
-
             # Añadir la venta a la lista principal
             ventas.append(venta)
-
             # Preguntrar si desea ingresar otra venta
             continuar = input("¿Desea ingresar otra venta? (s/n): ").lower()
             if continuar != "s":
@@ -67,6 +66,26 @@ def ingresar_ventas(ventas):
         except Exception as e:
             print(f"❌ Error al ingresar los datos: {e}")
             continue
+
+
+def cargar_ventas(archivo_csv="ventas.csv"):
+    """Carga las ventas desde un archivo CSV y las devuelve como una lista de diccionarios."""
+    try:
+        # Leer el archivo CSV usando pandas
+        df = pd.read_csv(archivo_csv)
+
+        # Convertir el DataFrame a una lista de diccionarios
+        # Se retorna una lista de diccionarios global VENTAS_DATA
+        ventas_cargadas = df.to_dict(orient="records")
+        print(f"✅ Datos cargados correctamente desde {archivo_csv}.")
+        return ventas_cargadas
+
+    except FileNotFoundError:
+        print(f"⚠️ El archivo {archivo_csv} no existe. No existen ventas registradas.")
+        return []
+    except Exception as e:
+        print(f"❌ Error al cargar los datos desde {archivo_csv}: {e}")
+        return []
 
 
 if __name__ == "__main__":
